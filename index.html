@@ -193,6 +193,7 @@ footer small{display:block;margin-top:4px}
 footer nav{display:flex;gap:18px;flex-wrap:wrap}
 footer nav a{text-decoration:none;color:#cfe0d8;font-weight:600;font-size:15px}
 footer nav a:hover{color:#fff}
+.credits{flex-basis:100%;margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);font-size:13.5px;line-height:1.55}.credits b{font:600 15px var(--sans);color:#fff}.credits a{color:#fff}.credits ul{margin:8px 0 0;padding-left:18px;columns:2;column-gap:28px}@media(max-width:640px){.credits ul{columns:1}}
 
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
 .rv.in{opacity:1;transform:none}
@@ -327,7 +328,7 @@ footer nav a:hover{color:#fff}
   <div class="head rv">
     <div><span class="eyebrow">Bonus 2</span>
     <h2>I video dei <em>punti base</em></h2>
-    <p class="sub">Circa 25 secondi ciascuno, senza audio: le foto del libro in sequenza, con numeri e istruzioni. Tocca un video per aprirlo in grande.</p></div>
+    <p class="sub">Da 1 a 2 minuti ciascuno, senza audio: mani vere al lavoro, rallentatore sui gesti chiave e i passaggi in italiano. Tocca un video per aprirlo in grande.</p></div>
   </div>
   <div class="vgrid" id="vgrid"></div>
 </div></section>
@@ -379,22 +380,27 @@ footer nav a:hover{color:#fff}
 <footer><div class="wrap">
   <div><b>Atelier Filo Vivo</b><small>Bonus del libro «Borse Uncinetto Moderne Senza Errori»</small></div>
   <nav><a href="#kit">Kit</a><a href="#video">Video</a><a href="#idee">300 idee</a></nav>
+<div class="credits"><b>Crediti dei video</b>
+  <small>Le riprese dei video dei punti base sono di questi autori e sono pubblicate con licenza
+  <a href="https://creativecommons.org/licenses/by/3.0/deed.it" rel="license">Creative Commons Attribuzione 3.0 (CC BY 3.0)</a>.
+  Sono state tagliate, rallentate e completate con i passaggi in italiano da Atelier Filo Vivo.</small>
+  <ul><li><b>JuYoung Hyun (Jju)</b> — «Crochet for Beginner: How to hold a hook and yarn»</li><li><b>Hand Maid by Emily</b> — «How to Chain Stitch (ch) for Beginner Crocheters»</li><li><b>CreuzArt</b> — «How to Make a Slip Stitch with a Crochet Hook»</li><li><b>Hand Maid by Emily</b> — «How to Single Crochet (sc) for Beginners»</li><li><b>Wendy's Kooky Crochet Tutorial</b> — «Crochet For Complete Beginners, Learn How Make A Double Crochet! Video Seven!»</li><li><b>Rich Textures Crochet</b> — «How to Make a Magic Ring in Crochet»</li><li><b>Kim Harrison</b> — «How Do You Crochet ... Increase and Decrease Crochet Stitches»</li><li><b>Rich Textures Crochet</b> — «Front and Back Loop Single Crochet | How to Crochet»</li><li><b>Rich Textures Crochet</b> — «How to Change Colour/add a new ball of yarn in Crochet»</li></ul></div>
 </div></footer>
 
 <script>
 const VIDEOS=[
- ["tenere-uncinetto-e-filo","Tenere uncinetto e filo"],["catenella","La catenella"],["maglia-bassissima","La maglia bassissima"],
- ["maglia-bassa","La maglia bassa"],["maglia-alta","La maglia alta"],["anello-magico","L'anello magico"],
- ["aumenti-e-diminuzioni","Aumenti e diminuzioni"],["giri-costa-e-colori","Giri, costa posteriore e colori"],["manico-con-anima","Il manico che non cede"]];
+ ["tenere-uncinetto-e-filo","Tenere uncinetto e filo","0:52"],["catenella","La catenella","1:50"],["maglia-bassissima","La maglia bassissima","1:05"],
+ ["maglia-bassa","La maglia bassa","2:16"],["maglia-alta","La maglia alta","2:07"],["anello-magico","L'anello magico","1:47"],
+ ["aumenti-e-diminuzioni","Aumenti e diminuzioni","1:50"],["giri-costa-e-colori","Giri, costa posteriore e colori","1:53"],["manico-con-anima","Il manico che non cede","1:08"]];
 const vg=document.getElementById('vgrid');
-vg.innerHTML=VIDEOS.map(([s,t],i)=>`
+vg.innerHTML=VIDEOS.map(([s,t,d],i)=>`
   <button class="vcard rv" id="v-${s}" data-i="${i}" aria-label="Guarda il video: ${t}">
-    <div class="th"><img src="${s}.jpg?v=3" alt="" loading="lazy"><div class="play"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div><span class="dur">0:25</span></div>
-    <div class="vt"><span class="vn">${i+1}</span><div><h3>${t}</h3><p>4 passaggi · senza audio</p></div></div>
+    <div class="th"><img src="${s}.jpg?v=4" alt="" loading="lazy"><div class="play"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div><span class="dur">${d}</span></div>
+    <div class="vt"><span class="vn">${i+1}</span><div><h3>${t}</h3><p>4 passaggi · ${d} · senza audio</p></div></div>
   </button>`).join('');
 const modal=document.getElementById('modal'),mv=document.getElementById('mv'),mt=document.getElementById('mt');
 let cur=0;
-function openV(i){cur=(i+VIDEOS.length)%VIDEOS.length;const [s,t]=VIDEOS[cur];mv.src=`${s}.mp4`;mv.poster=`${s}.jpg?v=3`;mt.textContent=`${cur+1}. ${t}`;modal.classList.add('open');mv.play().catch(()=>{});history.replaceState(null,'',`#v-${s}`)}
+function openV(i){cur=(i+VIDEOS.length)%VIDEOS.length;const [s,t]=VIDEOS[cur];mv.src=`${s}.mp4?v=4`;mv.poster=`${s}.jpg?v=4`;mt.textContent=`${cur+1}. ${t}`;modal.classList.add('open');mv.play().catch(()=>{});history.replaceState(null,'',`#v-${s}`)}
 function closeV(){mv.pause();modal.classList.remove('open');history.replaceState(null,'','#video')}
 vg.addEventListener('click',e=>{const c=e.target.closest('.vcard');if(c)openV(+c.dataset.i)});
 document.getElementById('close').onclick=closeV;
