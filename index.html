@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bonus · Borse Uncinetto Moderne Senza Errori</title>
 <meta name="description" content="I tre bonus gratuiti del libro Borse Uncinetto Moderne Senza Errori: kit stampabile, 9 video dei punti base e 300 idee di borse moderne.">
@@ -244,6 +245,10 @@ html.lock,html.lock body{overflow:hidden}
 .idea{content-visibility:auto;contain-intrinsic-size:auto 520px}
 @media (hover:none){.idea:hover,.vcard:hover,.oc:hover{transform:none}}
 @media (max-width:760px){.tools{position:static}}
+.modal .xfix{position:fixed;top:14px;right:14px;z-index:102;display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;background:#fff;color:var(--green-d);font:700 16px var(--sans);padding:12px 20px;min-height:48px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.modal .xfix span{font-size:22px;line-height:1}
+.modal .box{display:flex;flex-direction:column;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px)}
+.modal video{flex:1 1 auto;min-height:0;max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px);object-fit:contain;height:auto}
 </style>
 </head>
 <body>
@@ -343,6 +348,7 @@ html.lock,html.lock body{overflow:hidden}
 </div></section>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Video">
+  <button class="xfix" id="close2" aria-label="Chiudi il video"><span>×</span> Chiudi</button>
   <div class="box">
     <video id="mv" controls playsinline></video>
     <div class="bar"><b id="mt"></b><div class="nav2"><button id="prev">‹ Prec.</button><button id="next">Succ. ›</button></div><button class="x" id="close" aria-label="Chiudi">×</button><div class="hint">Scorri a destra o a sinistra per cambiare video, in giù per chiudere</div></div>
@@ -417,7 +423,7 @@ function openV(i){const was=isOpen;show(i);const h=`#v-${VIDEOS[cur][0]}`;if(was
 function closeV(){if(!isOpen)return;if(history.state&&history.state.v)history.back();else{hide();history.replaceState(null,'','#video')}}
 window.addEventListener('popstate',()=>{const i=VIDEOS.findIndex(v=>'#v-'+v[0]===location.hash);if(i>=0)show(i);else hide()});
 vg.addEventListener('click',e=>{const c=e.target.closest('.vcard');if(c)openV(+c.dataset.i)});
-document.getElementById('close').onclick=closeV;
+document.getElementById('close').onclick=closeV;document.getElementById('close2').onclick=closeV;
 document.getElementById('prev').onclick=()=>openV(cur-1);
 document.getElementById('next').onclick=()=>openV(cur+1);
 modal.addEventListener('click',e=>{if(e.target===modal)closeV()});
